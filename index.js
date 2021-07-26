@@ -27,7 +27,8 @@ client.on('message', async (msg) => {
         var author = info[1].replace('Author: ', '').split(' <')[0];
         versionEmbed.addField('Author:', author)
 
-        var date = new Date(info[2].replace('Date: ', '')).getTime();
+        var date = (new Date(info[2].replace('Date: ', '')).getTime()) / 1000;
+
         versionEmbed.addField('Date:', `<t:${date}>`);
 
         versionEmbed.addField('Message:', info[3].trim());
