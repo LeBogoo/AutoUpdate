@@ -10,11 +10,25 @@ client.on('ready', () => {
 });
 
 client.on('message', async (msg) => {
-    const { guild, channel, author, cleanContent } = msg;
-    console.log(`${guild.name}, #${channel.name} | ${author.username}: ${cleanContent}`);
-    if (cleanContent.startsWith('!hash')) {
-        const hash = (await exec('git rev-parse HEAD')).stdout.substr(0, 7);
-        channel.send(`Current version: \`${hash}\``)
+    const { guild, channel, cleanContent } = msg;
+    if (cleanContent.startsWith('!version')) {
+        const info = (await exec('git log -1')).stdout.split("\n").filter(e => e !== '');
+        const versionEmbed = new Discord.MessageEmbed();
+
+        var commit = info[0].substr(0, 14); // Get "commit" + 7 chars of hash
+        commit = commit.charAt(0).toUpperCase() + commit.slice(1); // Capitalize first char
+
+        versionEmbed.setTitle(commit);
+
+        var author = info[1].replace('Author: ', '').split(' <')[0];
+        versionEmbed.addField('Author:', author)
+
+        var date = new Date(info[2].replace('Date: ', '')).getTime();
+        versionEmbed.addField('Date:', `<t:${date}>`);
+
+        versionEmbed.addField('Message:', info[3].trim());
+
+        channel.send(versionEmbed);
     }
 });
 
