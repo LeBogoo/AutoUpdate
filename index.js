@@ -20,7 +20,7 @@ client.on('message', async (msg) => {
 
         versionEmbed.setTitle(commit);
 
-        var commitURL = (await (await exec('git remote get-url origin'))).stdout.replace(".git", `/commit/${info[0].substr(7)}`);
+        var commitURL = (await (await exec('git remote get-url origin'))).stdout.replace(".git", '') + `/commit/${info[0].substr(7)}`;
         versionEmbed.setURL(commitURL);
 
         var author = info[1].replace('Author: ', '').split(' <')[0];
