@@ -40,7 +40,7 @@ async function updateCheck() {
     if (answer !== 'Already up to date.\n') process.exit();
 }
 
-setInterval(updateCheck, 1000 * 60);
+setInterval(updateCheck, 1000 * 10);
 updateCheck();
 
 client.login(process.env.TOKEN);
