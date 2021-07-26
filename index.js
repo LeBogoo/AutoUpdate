@@ -9,9 +9,13 @@ client.on('ready', () => {
     console.log("Bot is ready!")
 });
 
-client.on('message', (msg) => {
+client.on('message', async (msg) => {
     const { guild, channel, author, cleanContent } = msg;
     console.log(`${guild.name}, #${channel.name} | ${author.username}: ${cleanContent}`);
+    if (cleanContent.startsWith('!hash')) {
+        const hash = (await exec('git rev-parse HEAD')).stdout.substr(0, 7);
+        channel.send(`Current version: \`${hash}\``)
+    }
 });
 
 // Check for updates on start
