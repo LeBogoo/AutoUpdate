@@ -15,7 +15,6 @@ client.on('message', async (msg) => {
         const info = (await exec('git log -1')).stdout.split("\n").filter(e => e !== '');
         const versionEmbed = new Discord.MessageEmbed();
 
-        console.log(info[0]);
         var commit = info[0].substr(0, 14); // Get "commit" + 7 chars of hash
         commit = commit.charAt(0).toUpperCase() + commit.slice(1); // Capitalize first char
 
