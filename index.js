@@ -16,12 +16,10 @@ client.on('message', (msg) => {
 
 // Check for updates on start
 async function updateCheck() {
-    const hash = await exec('git rev-parse HEAD');
-    await exec('git pull');
-    const newHash = await exec('git rev-parse HEAD');
+    const answer = await exec('git pull');
 
     // Exit bot. Systemd will restart automatically.
-    if (hash !== newHash) process.exit();
+    if (answer !== "Already up to date.") process.exit();
 }
 
 setInterval(updateCheck, 1000 * 60);
