@@ -5,9 +5,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=lebogo
-ExecStart=/usr/bin/node /var/www/bots/AutoUpdate/index.js
-WorkingDirectory=/var/www/bots/AutoUpdate
+User=USER
+ExecStart=/usr/bin/node WORKINGDIRECTORY/index.js
+WorkingDirectory=WORKINGDIRECTORY
 Restart=always
 
 [Install]
