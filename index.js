@@ -11,7 +11,7 @@ client.on('ready', () => {
 
 client.on('message', async (msg) => {
     const { guild, channel, cleanContent } = msg;
-    if (cleanContent.startsWith('!version')) {
+    if (cleanContent.startsWith('!version') || cleanContent.startsWith('!v')) {
         const info = (await exec('git log -1')).stdout.split("\n").filter(e => e !== '');
         const versionEmbed = new Discord.MessageEmbed();
 
